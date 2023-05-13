@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>Images Uploder And Chagne Profile</title>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="py-5 text-center bg-secondary text-white">
+            <h1 class="mb-3">Upload Your Images</h1>
+
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="image" id="imageFile">
+                <input type="submit" value="Upload" class="btn btn-danger">
+            </form>
+
+        </div>
+        
+        <div class="row">
+            {% for i in img %}
+            <div class="col-sm-4">
+                <div class="card m-2">
+                    <img src="{{i.photo.url}}" class="card-img-top" alt="Image" height="320px">
+                    <div class="card-body">
+                        <small class="card-text text-muted">Uploaded: {{i.date}}</small>
+                        
+                        <form action="{% url 'delete_data' i.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-sm mt-2">Delete</button>
+                            <a href="{% url 'change_profile' i.id %}" class="btn btn-danger btn-sm mt-2">Change Profile</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>

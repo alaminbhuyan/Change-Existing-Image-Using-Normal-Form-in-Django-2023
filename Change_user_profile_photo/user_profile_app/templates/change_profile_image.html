@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>Images Uploder</title>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="py-5 text-center bg-secondary text-white">
+            <h1 class="mb-3">Upload Your Images</h1>
+            <h2>{{image_id}}</h2>
+            <form action="{% url 'change_data' image_id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="image" id="imageFile">
+                <input type="submit" value="Upload" class="btn btn-danger">
+                <a href="/" class="btn btn-primary">Back</a>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>
